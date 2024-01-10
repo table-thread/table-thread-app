@@ -1,0 +1,88 @@
+@import './sideNav.scss';
+
+a {
+  text-decoration: none;
+}
+
+.box-shadow {
+  box-shadow: 0px 0px 25px 3px rgba(238, 238, 238, 0.75);
+}
+
+@media screen and (max-width: 992px) {
+  .show-sider {
+    &::before {
+      height: 100vh;
+      opacity: 1;
+      visibility: visible;
+      position: fixed;
+      content: "";
+      z-index: 11111;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(0, 0, 0, 0.5);
+    }
+  }
+}
+
+// .ant-layout-sider {
+//   width: 280px !important;
+//   max-width: 280px !important;
+//   min-width: 280px !important;
+// }
+
+// .toogleSideBar {
+//   width: 80px !important;
+//   max-width: 80px !important;
+//   min-width: 80px !important;
+// }
+
+// @media screen and (max-width: 992px) {
+//   .ant-layout-sider {
+//     display: none;
+//   }
+
+//   .active-sidebar {
+
+//   }
+// }
+
+// .ant-layout-sider-children {
+//   position: fixed;
+//   width: 275px;
+
+//   .ant-menu.ant-menu-inline-collapsed {
+//     width: 75px !important;
+//   }
+
+//   // .ant-menu-item-selected {
+//   //   background-color: aqua  ;
+//   // }
+// }
+
+.login-box {
+  width: 480px;
+}
+
+.login-box-divider {
+  margin: 0px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  border: 0px rgb(66, 82, 98);
+}
+
+.login-box-divider::before {
+  width: 100% ;
+  border-top: thin solid rgb(229, 234, 239);
+  content: "";
+}
+
+.login-box-divider::after {
+  width: 100%;
+  border-top: thin solid rgb(229, 234, 239);
+  content: "";
+}
+

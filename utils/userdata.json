@@ -1,0 +1,122 @@
+[
+  {
+    "name": "user1",
+    "email": "user1@gmail.com",
+    "mobile": "+917357909096",
+    "photo": "user1photo",
+    "companies": [
+      "comapnies"
+    ],
+    "isAdmin": false,
+    "isTallyCloud": false,
+    "createdBy" : "Admin"
+  },
+  {
+    "name": "user2",
+    "email": "user1@gmail.com",
+    "mobile": "+917357909096",
+    "photo": "user1photo",
+    "companies": [
+      "comapnies"
+    ],
+    "isAdmin": false,
+    "isTallyCloud": false ,
+    "createdBy" : "X_user"
+  },
+  {
+    "name": "user3",
+    "email": "user1@gmail.com",
+    "mobile": "+917357909096",
+    "photo": "user1photo",
+    "companies": [
+      "comapnies"
+    ],
+    "isAdmin": false,
+    "isTallyCloud": false,
+    "createdBy" : "Admin"
+  },
+  {
+    "name": "user4",
+    "email": "user1@gmail.com",
+    "mobile": "+917357909096",
+    "photo": "user1photo",
+    "companies": [
+      "comapnies"
+    ],
+    "isAdmin": false,
+    "isTallyCloud": false,
+    "createdBy" : "Admin"
+  },
+  {
+    "name": "user5",
+    "email": "user1@gmail.com",
+    "mobile": "+917357909096",
+    "photo": "user1photo",
+    "companies": [
+      "comapnies"
+    ],
+    "isAdmin": false,
+    "isTallyCloud": false,
+    "createdBy" : "X-user"
+  },
+  {
+    "name": "user6",
+    "email": "user1@gmail.com",
+    "mobile": "+917357909096",
+    "photo": "user1photo",
+    "companies": [
+      "comapnies"
+    ],
+    "isAdmin": false,
+    "isTallyCloud": false,
+    "createdBy" : "Admin"
+  },
+  {
+    "name": "user7",
+    "email": "user1@gmail.com",
+    "mobile": "+917357909096",
+    "photo": "user1photo",
+    "companies": [
+      "comapnies"
+    ],
+    "isAdmin": false,
+    "isTallyCloud": false,
+    "createdBy" : "Admin"
+  },
+  {
+    "name": "user8",
+    "email": "user1@gmail.com",
+    "mobile": "+917357909096",
+    "photo": "user1photo",
+    "companies": [
+      "comapnies"
+    ],
+    "isAdmin": false,
+    "isTallyCloud": false,
+    "createdBy" : "X-User"
+  },
+  {
+    "name": "user9",
+    "email": "user1@gmail.com",
+    "mobile": "+917357909096",
+    "photo": "user1photo",
+    "companies": [
+      "comapnies"
+    ],
+    "isAdmin": false,
+    "isTallyCloud": false,
+    "createdBy" : "Admin"
+  },
+  {
+    "name": "user10",
+    "email": "user1@gmail.com",
+    "mobile": "+917357909096",
+    "photo": "user1photo",
+    "companies": [
+      "comapnies"
+    ],
+    "isAdmin": false,
+    "isTallyCloud": false,
+    "createdBy" : "X-User"
+  }
+]
