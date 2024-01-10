@@ -8,6 +8,7 @@
 export const ApiHost = "https://apis-dev.accountsntax.com/api/v1";
 export const localHost = "http://192.168.1.44:5001/api/v1";
 export const adminCode = "ACCTX23048373416";
+export const temp = "ACCTX23048373416";
 
 
 export const emailRegexp: RegExp = /^[A-Z0-9!._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
