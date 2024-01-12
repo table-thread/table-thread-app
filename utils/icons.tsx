@@ -1,29 +1,21 @@
-import { FaPlusCircle, FaRegEdit, FaTrash, FaRegUser } from "react-icons/fa";
-import { AiOutlineMessage, AiOutlineSetting, AiOutlineTeam, AiOutlineCalendar } from "react-icons/ai";
-import { BsChatText, BsPeople } from "react-icons/bs";
 import { MoreOutlined } from '@ant-design/icons';
 import { InfoCircleOutlined } from "@ant-design/icons";
-import { FiEdit2 } from "react-icons/fi";
-import { IoDuplicateSharp } from "react-icons/io5";
 import {
   MenuFoldOutlined, MenuUnfoldOutlined, GithubOutlined, DownOutlined, ZoomInOutlined, TeamOutlined, BellOutlined, UnorderedListOutlined,
 } from '@ant-design/icons';
+import { TiHome } from "react-icons/ti";
+import { SiAirtable } from "react-icons/si";
+import { FaCartPlus, FaKeyboard } from "react-icons/fa";
+import { HiUsers } from "react-icons/hi2";
+import { GiNotebook } from "react-icons/gi";
+import { IoMdSettings, IoIosLogOut } from "react-icons/io";
+import { IoEye,IoEyeOff } from "react-icons/io5";
+import { MdEdit } from "react-icons/md";
+import { BsTrash3Fill } from "react-icons/bs";
 
 
-export const ICAiOutlineSetting = () => { return <AiOutlineSetting color="#673275" /> };
-export const ICAiOutlineCalendar = () => { return <AiOutlineCalendar color="#673275" /> };
-export const ICAiOutlineMessage = () => { return <AiOutlineMessage color="#673275" /> };
-export const ICAiOutlineTeam = () => { return <AiOutlineTeam color="#673275" /> };
-export const ICFaRegUser = () => { return <FaRegUser color="#673275" /> };
-export const ICFaTrash = () => { return <FaTrash color="#673275" /> };
-export const ICFaRegEdit = () => { return <FaRegEdit color="#673275" /> };
-export const ICFaPlusCircle = () => { return <FaPlusCircle color="#673275" /> };
-export const ICBsPeople = () => { return <BsPeople color="#673275" /> };
-export const ICBsChatText = () => { return <BsChatText color="#673275" /> };
-export const ICMoreOutlined = () => { return <MoreOutlined rev="" color="#673275" /> };
-export const ICInfoCircleOutlined = () => { return <InfoCircleOutlined rev="" color="#673275" /> };
-export const ICFiEdit2 = () => { return <FiEdit2 color="#673275" /> };
-export const ICIoDuplicateSharp = () => { return <IoDuplicateSharp color="#673275" /> };
+
+
 export const ICMenuFoldOutlined = () => { return <MenuFoldOutlined color="#773275" rev={undefined} /> };
 export const ICMenuUnfoldOutlined = () => { return <MenuUnfoldOutlined color="#773275" rev={undefined} /> };
 export const ICGithubOutlined = () => { return <GithubOutlined color="#773275" rev={undefined} /> };
@@ -32,3 +24,15 @@ export const ICZoomInOutlined = () => { return <ZoomInOutlined color="#773275" r
 export const ICTeamOutlined = () => { return <TeamOutlined color="#773275" rev={undefined} /> };
 export const ICBellOutlined = () => { return <BellOutlined color="#773275" rev={undefined} /> };
 export const ICUnorderedListOutlined = () => { return <UnorderedListOutlined color="#773275" rev={undefined} /> };
+export const ICTiHome = () => { return <TiHome color="#773275" /> };
+export const ICSiAirtable = () => { return <SiAirtable color="#773275" /> };
+export const ICFaCartPlus = () => { return <FaCartPlus color="#773275" /> };
+export const ICHiUsers = () => { return <HiUsers color="#773275" /> };
+export const ICGiNotebook = () => { return <GiNotebook color="#773275" /> };
+export const ICIoMdSettings = () => { return <IoMdSettings color="#773275" /> };
+export const ICFaKeyboard = () => { return <FaKeyboard color="#773275" /> };
+export const ICIoIosLogOutd = () => { return <IoIosLogOut color="#773275" /> };
+export const ICIoEye = () => { return <IoEye color="#773275" /> };
+export const ICIoEyeOff = () => { return <IoEyeOff color="#773275" /> };
+export const ICMdEdit = () => { return <MdEdit color="#773275" /> };
+export const ICBsTrash3Fill = () => { return <BsTrash3Fill color="#773275" /> };

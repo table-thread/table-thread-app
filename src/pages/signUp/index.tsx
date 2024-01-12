@@ -52,13 +52,7 @@ const Signup = () => {
       password: formValues.password,
     }
 
-    // if (isNewUser == true) {
-    //   Object.assign(onlyApiData, { type: "user" });
-    // }
-
-    // console.log(TAG, ' onlyApiData ', onlyApiData);
     registerCall(onlyApiData);
-
   }
 
 
@@ -74,7 +68,7 @@ const Signup = () => {
 
         if (response?.status == 200 && response?.data?.success == true) {
 
-          // ToastComponent(response?.data?.msg);
+          ToastComponent(response?.data?.msg);
           localStorage.setItem('otpmobile', JSON.stringify(response?.data?.data));
           if (isNewUser == true) {
             router.push(`/login`);

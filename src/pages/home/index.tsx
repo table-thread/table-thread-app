@@ -1,9 +1,6 @@
 import React from 'react';
-import {
-  DownOutlined,
-  TeamOutlined,
-} from '@ant-design/icons';
 
+import { ICDownOutlined, ICTeamOutlined } from '@/utils/icons'
 import { revenuChart, modernPageImage2, modernPageImage3, modernPageImage4 } from '@/utils/image';
 import { Button, Card, Space, Col, Row } from 'antd';
 
@@ -21,7 +18,8 @@ const Modern = () => {
           return (
             <div className='col-lg-2 col-md-3 col-sm-4 col-12'>
               <Card className='bg-info px-1'>
-                <TeamOutlined className='fs-1' />
+                {/* <ICTeamOutlined className='fs-1' /> */}
+                <ICTeamOutlined />
                 <p className='fs-5 my-1'>employees</p>
                 <p className='fs-5 m-0'>96</p>
               </Card>
@@ -39,7 +37,7 @@ const Modern = () => {
                 <p className=''>Overview of profit</p>
               </div>
               {/* <div className=''> */}
-              <Button>march 2023 <DownOutlined /></Button>
+              <Button>march 2023 <ICDownOutlined /></Button>
               {/* </div> */}
             </div>
             <div className='row'>
@@ -48,21 +46,27 @@ const Modern = () => {
               </div>
               <div className='col-lg-4 col-md-4'>
                 <div className='d-flex align-items-center my-3'>
-                  <TeamOutlined className='fs-2 mx-3' />
+                 {/* <ICTeamOutlined className='fs-2 mx-3' /> */}
+                  <ICTeamOutlined />
+
                   <div>
                     <p className='m-0 fs-3'>$55,26,566</p>
                     <p className='m-0'>total earnings</p>
                   </div>
                 </div>
                 <div className='d-flex align-items-center my-3'>
-                  <TeamOutlined className='fs-2 mx-3' />
+                 {/* <ICTeamOutlined className='fs-2 mx-3' /> */}
+                  <ICTeamOutlined />
+
                   <div>
                     <p className='m-0'>total earnings</p>
                     <p className='m-0 fs-5'>$55,26,566</p>
                   </div>
                 </div>
                 <div className='d-flex align-items-center my-3'>
-                  <TeamOutlined className='fs-2 mx-3' />
+                 {/* <ICTeamOutlined className='fs-2 mx-3' /> */}
+                  <ICTeamOutlined />
+
                   <div>
                     <p className='m-0'>total earnings</p>
                     <p className='m-0 fs-5'>$5526566</p>
@@ -106,7 +110,7 @@ const Modern = () => {
       </div>
 
       <div className='row'>
-        <div span={8} className='col-lg-4 col-md-12'>
+        <div className='col-lg-4 col-md-12'>
           <Card className='mb-4 box-shadow'>
             <div>
               <p className='fw-medium fs-5 my-0'>Employee Salary</p>
@@ -115,14 +119,16 @@ const Modern = () => {
             <img className='w-100' src={modernPageImage3} alt='revenu-chart' />
             <Row className=''>
               <Col span={12} className='d-flex align-items-center my-3'>
-                <TeamOutlined className='fs-2 mx-3' />
+                {/* <ICTeamOutlined className='fs-2 mx-3' /> */}
+               <ICTeamOutlined />
                 <div>
                   <p className='m-0'>Salary</p>
                   <p className='m-0 fs-4'>$36,358</p>
                 </div>
               </Col>
               <Col span={12} className='d-flex align-items-center my-3'>
-                <TeamOutlined className='fs-2 mx-3' />
+                {/* <ICTeamOutlined className='fs-2 mx-3' /> */}
+               <ICTeamOutlined />
                 <div>
                   <p className='m-0'>Profit</p>
                   <p className='m-0 fs-5'>$5,296</p>
@@ -254,7 +260,7 @@ const Modern = () => {
                 <p className=''>Best Products</p>
               </Col>
               <div className='col-2'>
-                <Button>march 2023 <DownOutlined /></Button>
+                <Button>march 2023 <ICDownOutlined /></Button>
               </div>
             </div>
             <Col span={24} className='row border-bottom pb-3'>

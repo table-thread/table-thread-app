@@ -16,6 +16,7 @@ export const hsnMaxLength: string = "Account number must contain 11 digits.";
 export const max7Digit: string = "Maximum 7 digits are allowed.";
 export const noFileSelcted: string = "No file selected.";
 export const fileSizeUnder: string = "File size should be under %size%.";
+export const amount: string = "max amount should be under 100000 Rs.";
 
 
 

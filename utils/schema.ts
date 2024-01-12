@@ -14,7 +14,8 @@ import {
   hsnMaxLength,
   alphaNumericAllow,
   emailMobileDataType,
-  max7Digit
+  max7Digit,
+  amount,
 } from "./message";
 
 
@@ -1288,4 +1289,36 @@ export const voucherConfEditS: any = Yup.object().shape({
     .trim()
     .max(1000, fieldlMaxLength.replace("%key%", "Terms & Conditions").replace("%length%", "1000"))
     .required(fieldRequired.replace("%key%", "Terms & Conditions")),
+});
+
+export const productSchemaNewProduct: any = Yup.object().shape({
+  productName: Yup.string()
+    .trim()
+    .min(3, fieldMinLength.replace("%key%", "Product Name").replace("%length%", "3"))
+    .max(250, fieldlMaxLength.replace("%key%", "Product Name").replace("%length%", "250"))
+    .required(fieldRequired.replace("%key%", "Product Name")),
+    productType: Yup.string()
+    .trim()
+    .min(3, fieldMinLength.replace("%key%", "Product Type").replace("%length%", "3"))
+    .max(250, fieldlMaxLength.replace("%key%", "Product Type").replace("%length%", "250"))
+    .required(fieldRequired.replace("%key%", "Product Type")),
+    category: Yup
+    .string()
+    .trim()
+    .min(3, fieldMinLength.replace("%key%", "Food Category").replace("%length%", "3"))
+    .max(250, fieldlMaxLength.replace("%key%", "Food Category").replace("%length%", "250"))
+    .required(fieldRequired.replace("%key%", "Food Category")),
+    amount: Yup
+    .number()
+    .typeError(numberAllow)
+    .integer(integerAllow)
+    // .min(1, contactLength)
+    .max(100000, amount)
+    .required(fieldRequired.replace("%key%", "amount")),
+    image: Yup
+    .string()
+    .trim()
+    // .min(8, fieldMinLength.replace("%key%", "image").replace("%length%", "8"))
+    // .max(12, fieldlMaxLength.replace("%key%", "image").replace("%length%", "12"))
+    .required(fieldRequired.replace("%key%", "image")),
 });
