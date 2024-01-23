@@ -1318,7 +1318,9 @@ export const productSchemaNewProduct: any = Yup.object().shape({
     image: Yup
     .string()
     .trim()
-    // .min(8, fieldMinLength.replace("%key%", "image").replace("%length%", "8"))
-    // .max(12, fieldlMaxLength.replace("%key%", "image").replace("%length%", "12"))
     .required(fieldRequired.replace("%key%", "image")),
+    date: Yup
+    .string()
+    .trim()
+    .required(fieldRequired.replace("%key%", "date")),
 });
