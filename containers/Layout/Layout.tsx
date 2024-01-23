@@ -3,7 +3,7 @@ import { Layout } from 'antd';
 
 import Navhead from '@/containers/Header/Header';
 import Sidenavebar from '@/containers/Sidenavebar/Sidenavebar';
-import Modern from '../../src/pages/modern';
+import Modern from '../../src/pages/home';
 
 
 const { Sider, Content } = Layout;

@@ -53,7 +53,7 @@
     "component/columnchart/columnchart.js",
     "containers/Mis/SalesMonthlyChart.js",
     "component/Toast/ToastModular.tsxt"
-, "containers/Header/Header.tsx", "src/pages/login/index.tsx", "src/pages/modern/index.jsx"  ],
+, "containers/Header/Header.tsx", "src/pages/login/index.tsx", "src/pages/home/index.tsx"  ],
   "exclude": [
     "node_modules",
     "pages"
