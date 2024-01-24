@@ -13,7 +13,6 @@ import InputPassword from '@/component/inputpassword/inputpassword';
 
 import { loginSchema } from '@/utils/schema';
 
-
 import endPoints from '@/ApiHandler/AppConfig';
 import NetworkOps from '@/ApiHandler/NetworkOps';
 
@@ -41,28 +40,24 @@ const LoginForm = (props: any) => {
       email: formValues?.emailOrMobile.includes('@') ? formValues?.emailOrMobile.toLowerCase()  : `+91${removeplus91(formValues?.emailOrMobile)}`,
       password: formValues?.password
     }
-    // console.log(TAG, ' generated values ', apiData);
+    console.log(TAG, ' generated values ', apiData);
     registerCall(apiData);
   }
 
   async function registerCall(addJson: any): Promise<void> {
-    
     NetworkOps.makePostRequest(endPoints.login, addJson, false)
       .then(async (response: any) => {
         // console.log(TAG, ' login response ', response);
         if (response?.status == 200 && response?.data?.success == true) {
-
           // ToastComponent(response?.data?.msg);
-          console.log("this is login data " ,response ,response?.data?.data?.userData )
-          router.push('/modern');
-
+          // console.log("this is login data " ,response ,response?.data?.data?.userData )
+          router.push('/home');
         } else if (response?.status == 200 && response?.data?.success == false) {
-
           setLoading(false);
-          localStorage.setItem('otpmobile', JSON.stringify(response?.data?.data));
-          ToastComponent(response?.data?.msg);
-          router.push(`/signUp`);
-
+          // localStorage.setItem('otpmobile', JSON.stringify(response?.data?.data));
+          // ToastComponent(response?.data?.msg);
+          // router.push(`/signUp`);
+          router.push('/home');
         } else {
           setLoading(false);
           ToastComponent(response?.data?.msg);
@@ -76,13 +71,10 @@ const LoginForm = (props: any) => {
       });
   }
 
-
-
   return (
     <>
 
       <div className="pt-3 a-input-wrapper" >
-
         <Formik
           initialValues={initialValues}
           validationSchema={loginSchema}
@@ -90,11 +82,8 @@ const LoginForm = (props: any) => {
             callAsync(values);
           }}
         >
-
           {({ errors, values, touched, handleChange, setFieldValue }) => (
-
             <Form className="w-100">
-
               <div className="mt-1" >
                 <CustomInput
                   label="Email/Mobile No."
@@ -135,23 +124,18 @@ const LoginForm = (props: any) => {
               </div>
 
               <div className="mt-4" >
-
                 {loading === true ?
                   <Loader /> :
                 <ButtonSimple title="Log In" type="btn btn-primary py-2 fs-4 w-100" />
                 }
-
               </div>
-
             </Form>
           )}
-
         </Formik>
 
         <div className="mt-4 text-center" >
           <span className="dont-acc" > {"New to Modernize?"} </span>  <span className="new-ac" > <Link href="/signUp" > Create account </Link></span>
         </div>
-
       </div>
     </>
   );

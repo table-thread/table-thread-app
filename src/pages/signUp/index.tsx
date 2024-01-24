@@ -1,22 +1,18 @@
 import React, { useState } from 'react';
+import { Formik, Form } from 'formik';
+import { useRouter } from 'next/router';
 
 import Image from 'next/image';
 import Link from 'next/link'
-import { Formik, Form } from 'formik';
-import { useRouter } from 'next/router';
 
 import CustomInput from '@/component/input/input';
 import InputPassword from '@/component/inputpassword/inputpassword';
 import ButtonSimple from '@/component/buttonsimple/buttonsimple';
 import ToastComponent from '@/component/Toast/Toast';
 import Loader from '@/component/loader/loader';
-// import ToastModular from '@/component/Toast/ToastModular';
 
-
-import { passwordOnly, signupSchemaNewUser, mobileOnly } from '@/utils/schema';
+import { passwordOnly, signupSchemaNewUser } from '@/utils/schema';
 import { logo } from '@/utils/image';
-// import { alreadyRegClient } from '@/utils/message';
-// import { isEmpty } from '@/utils/helper';
 
 import endPoints from '@/ApiHandler/AppConfig';
 import NetworkOps from '@/ApiHandler/NetworkOps';
@@ -27,9 +23,8 @@ const Signup = () => {
   const router = useRouter();
   // const { messageApi, contextHolder } = ToastModular();
 
-  const [loading, setLoading] = useState<boolean>(false);
   const [isDisable, setDisable] = useState<any>(false);
-
+  const [loading, setLoading] = useState<boolean>(false);
   const [isNewUser, setIsNewUser] = useState<any>(true);
 
   const [initialState, setinitialState] = useState<any>({
@@ -52,6 +47,7 @@ const Signup = () => {
       password: formValues.password,
     }
 
+    console.log(TAG , onlyApiData);
     registerCall(onlyApiData);
   }
 
@@ -92,10 +88,7 @@ const Signup = () => {
   return (
 
     <section id="loginWrapper" >
-
       <div className="row justify-content-center m-0" style={{ backgroundColor: "#f3f7ff" }}>
-        {/* {contextHolder} */}
-
         <div className="col-lg-5 col-11 card p-5 mt-5" style={{ borderRadius: "1rem" }}>
           <div className="col-xl-12 col-lg-12 col-md-12 col-12" >
             <div className="a-t-h text-center" >
@@ -112,9 +105,7 @@ const Signup = () => {
               >
                 {({ errors, values, touched, handleChange, setFieldValue }) => (
                   <Form className="w-100">
-
                     <div className="row gy-2 gx-3" >
-
                       <div className="col-lg-6 col-12" >
                         <CustomInput
                           label="First Name"
@@ -210,7 +201,6 @@ const Signup = () => {
                           {errors.confirmPassword && touched.confirmPassword ? (<div className="in-error">{`${errors.confirmPassword}`}</div>) : null}
                         </div>
                         : ""}
-
                     </div>
 
                     <div className="mt-4" >
@@ -218,7 +208,6 @@ const Signup = () => {
                         <Loader /> :
                         <ButtonSimple title="Continue" type="btn btn-primary py-2 fs-4 w-100" />}
                     </div>
-
                   </Form>
                 )}
               </Formik>
@@ -227,13 +216,9 @@ const Signup = () => {
             <div className="mt-4 text-center" >
               <span className="dont-acc" > {"Already Register?"} </span> <Link href="login" > <span className="new-ac" >Login</span> </Link>
             </div>
-
-
           </div>
         </div >
-
       </div >
-
     </section >
   );
 }

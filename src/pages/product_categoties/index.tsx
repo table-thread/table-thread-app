@@ -1,97 +1,39 @@
-import React, { useEffect, useState } from 'react';
-
-import Link from 'next/link';
+import React, { useState } from 'react';
+import { Button, Card } from 'antd';
+import { ICMdEdit, ICBsTrash3Fill } from '@/utils/icons';
 
 import HomeLayout from '@/containers/HomeLayout/HomeLayout';
 
-import { Button, Card, Modal } from 'antd';
-
-import { ICIoEye, ICIoEyeOff, ICMdEdit, ICBsTrash3Fill } from '@/utils/icons';
-import { productSchemaNewProduct, } from '@/utils/schema';
-import { Formik, Form } from 'formik';
-
-import CustomInput from '@/component/input/input';
-import Loader from '@/component/loader/loader';
-import ButtonSimple from '@/component/buttonsimple/buttonsimple';
+import AddCategories from '@/containers/modal/product_categories/AddCategories';
+import EditCategories from '@/containers/modal/product_categories/EditCategories';
+import DeleteCategories from '@/containers/modal/product_categories/DeleteCategories';
 
 
 
 const ProductCategories = () => {
 
-  const [product, setProduct] = useState(
-    [
-      {
-        category: 'Starter',
-        date: '18-01-2024',
-        items: 10
-      },
-      {
-        category: 'fast-food',
-        date: '18-01-2024',
-        items: 15
-      },
-      {
-        category: 'desert',
-        date: '18-01-2024',
-        items: 4
-      },
-    ]
-  );
+
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [editOpen, setEditOpen] = useState(false);
-  const [deleteOpen, setDeleteOpen] = useState(false);
+  const [editOpen, setEditOpen] = useState<Boolean>(false);
+  const [deleteOpen, setDeleteOpen] = useState<Boolean>(false);
 
-  const [isDisable, setDisable] = useState<any>(false);
-  const [loading, setLoading] = useState<boolean>(false);
-  const [initialState, setinitialState] = useState<any>({
-    category: "",
-    date: "",
-  });
-
-
-  const showModal = () => {
-    setIsModalOpen(true);
-  };
-
-  const handleOk = () => {
-    setIsModalOpen(false);
-  };
-
-  const handleCancel = () => {
-    setIsModalOpen(false);
-    setEditOpen(false);
-    setDeleteOpen(false);
-  };
-
-  async function callAsync(formValues: any) {
-    // console.log(formValues);
-
-    const onlyApiData = {
-      category: formValues.category,
-      date: formValues.date,
-    }
-
-    console.log(onlyApiData);
-    setProduct((prev: any) => [...prev, onlyApiData]);
-    setinitialState({
-
-    })
-    setIsModalOpen(false);
-  }
-
-  const handleDeleteItem = (item: any) => {
-    const newProductItems = product.filter((iten, index) => index !== item)
-    console.log(newProductItems);
-    setProduct(newProductItems);
-    setDeleteOpen(false);
-  }
-
-  const setDeleteOpenfn = (item: any,) => {
-    console.log(item);
-    setDeleteOpen(true)
-    // handleDeleteItem(item)
-  }
-
+  const [product, setProduct] = useState([
+    {
+      category: 'Starter',
+      date: '18-01-2024',
+      items: 10
+    },
+    {
+      category: 'fast-food',
+      date: '18-01-2024',
+      items: 15
+    },
+    {
+      category: 'desert',
+      date: '18-01-2024',
+      items: 4
+    },
+  ]);
 
   return (
     <HomeLayout>
@@ -100,75 +42,8 @@ const ProductCategories = () => {
           <Card className='mb-4 ps-3 box-shadow'>
             <div className='d-flex justify-content-between align items-center mb-5'>
               <div className='fw-bold fs-4' >Products Categories</div>
-              <Button onClick={showModal}>Add New Product</Button>
-              <Modal title="Add Product" open={isModalOpen} onCancel={handleCancel} footer={[]} >
-                <div className="row justify-content-center m-0" style={{ backgroundColor: "#f3f7ff" }}>
-                  {/* {contextHolder} */}
+              <Button onClick={() => setIsModalOpen(true)}>Add New Product</Button>
 
-                  <div className="col-xl-12 col-lg-12 col-md-12 col-12 py-3" >
-                    {/* <div className="" > */}
-                    <Formik
-                      initialValues={initialState}
-                      validationSchema={productSchemaNewProduct}
-                      onSubmit={values => {
-                        callAsync(values);
-                      }}
-                    >
-                      {({ errors, values, touched, handleChange, setFieldValue }) => (
-                        <Form className="w-100">
-                          <div className="row gy-2 gx-3" >
-
-                            <div className="col-12" >
-                              <CustomInput
-                                label="Product Category"
-                                id="category"
-                                name="category"
-                                placeholder="product Category"
-                                type="text"
-                                disabled={loading}
-                                maxLength={250}
-                                defaultValue={values.category}
-                                asterisk={true}
-                                onChangeEvent={(val: any) => { setFieldValue("category", val.target.value) }}
-                              />
-                              {JSON.stringify(errors.category)}
-                            </div>
-
-                            <div className="col-12" >
-                              <CustomInput
-                                label="Date"
-                                id="date"
-                                name="date"
-                                placeholder="date"
-                                type="date"
-                                disabled={loading}
-                                maxLength={10}
-                                defaultValue={values.date}
-                                asterisk={true}
-                                onChangeEvent={(val: any) => { setFieldValue("date", val.target.value) }}
-                              />
-                              {JSON.stringify(errors.date)}
-                            </div>
-
-                          </div>
-
-                          <div className="mt-4" >
-                            {loading === true ?
-                              <Loader /> :
-                              <>
-                                <ButtonSimple title='Cancel' type='me-3 btn border' onClickEvent={() => setIsModalOpen(false)} />
-                                <ButtonSimple title="Submit" type="btn btn-primary  me-3" onClickEvent={() => callAsync(values)} />
-                              </>}
-                          </div>
-
-                        </Form>
-                      )}
-                    </Formik>
-                    {/* </div> */}
-
-                  </div>
-                </div >
-              </Modal>
             </div>
             <div className='row border-bottom pb-3'>
               <div className='col-2 fw-bold'>Sr. No</div>
@@ -193,7 +68,7 @@ const ProductCategories = () => {
                       <div onClick={() => setEditOpen(true)}><ICMdEdit /></div>
                     </div>
                     <div className='table-icons'>
-                      <div onClick={() => setDeleteOpenfn(index)}><ICBsTrash3Fill /></div>
+                      <div onClick={() => setDeleteOpen(true)}><ICBsTrash3Fill /></div>
                     </div>
                   </div>
 
@@ -203,81 +78,22 @@ const ProductCategories = () => {
           </Card>
         </div>
         <>
-          <Modal title="Edit   Product" open={editOpen} onCancel={handleCancel} footer={[
-          ]}>
-            <section id="editWrapper" >
+          <AddCategories
+            openModal={isModalOpen}
+            setOpenModal={setIsModalOpen}
+          />
 
-              <div className="row justify-content-center m-0" style={{ backgroundColor: "#f3f7ff" }}>
-                {/* {contextHolder} */}
+          <EditCategories
+            openEditModal={editOpen}
+            setOpenEditModal={setEditOpen}
+          />
 
-                <div className="col-xl-12 col-lg-12 col-md-12 col-12" >
-                  <div className="pt-5 a-input-wrapper" >
-                    <Formik
-                      initialValues={initialState}
-                      validationSchema={productSchemaNewProduct}
-                      onSubmit={values => {
-                        callAsync(values);
-                      }}
-                    >
-                      {({ errors, values, touched, handleChange, setFieldValue }) => (
-                        <Form className="w-100">
-                          <div className="row gy-2 gx-3" >
+          <DeleteCategories
+            openDeleteModal={deleteOpen}
+            setDeleteOpenModal={setDeleteOpen}
+          />
 
-                            <div className="col-12" >
-                              <CustomInput
-                                label="Product Category"
-                                id="category"
-                                name="category"
-                                placeholder="product Category"
-                                type="text"
-                                disabled={loading}
-                                maxLength={250}
-                                defaultValue={values.category}
-                                asterisk={true}
-                                onChangeEvent={(val: any) => { setFieldValue("category", val.target.value) }}
-                              />
-                              {JSON.stringify(errors.category)}
-                            </div>
 
-                            <div className="col-12" >
-                              <CustomInput
-                                label="Date"
-                                id="date"
-                                name="date"
-                                placeholder="date"
-                                type="date"
-                                disabled={loading}
-                                maxLength={10}
-                                defaultValue={values.date}
-                                asterisk={true}
-                                onChangeEvent={(val: any) => { setFieldValue("date", val.target.value) }}
-                              />
-                              {JSON.stringify(errors.amount)}
-                            </div>
-
-                          </div>
-
-                          <div className="mt-4" >
-                            {loading === true ?
-                              <Loader /> :
-                              <>
-                                <Button title="Cancel" className="me-3" onClick={() => setEditOpen(false)}>Cancel</Button>
-                                <ButtonSimple title="Submit" type="btn btn-primary  me-3" />
-                              </>}
-                          </div>
-
-                        </Form>
-                      )}
-                    </Formik>
-                  </div>
-
-                </div>
-              </div >
-            </section >
-          </Modal>
-          <Modal title="Delete Item" open={deleteOpen} onCancel={handleCancel} onOk={() => handleDeleteItem} >
-            <p>for delete item click ok</p>
-          </Modal>
         </>
       </div>
     </HomeLayout>
