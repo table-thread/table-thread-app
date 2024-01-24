@@ -1,5 +1,6 @@
 import React from 'react';
-import { Layout, Button } from 'antd';
+import { Layout, Button, Dropdown, Menu, Space } from 'antd';
+
 import { ICMenuFoldOutlined, ICMenuUnfoldOutlined, ICGithubOutlined, ICDownOutlined, ICZoomInOutlined, ICTeamOutlined, ICBellOutlined, ICUnorderedListOutlined, } from '@/utils/icons'
 
 const { Header } = Layout;
@@ -10,6 +11,7 @@ const TAG = "Header: ";
 const Navhead = (props: any) => {
 
   const { hideSideBar, showSideBar, collapsOnSD, setCollapsOnSD } = props;
+
   const style = {
     fontSize: '18px',
     borderRadius: "50px",
@@ -38,20 +40,27 @@ const Navhead = (props: any) => {
             style={style}
             className='sm-sidebar-button'
           />
-          <Button type="text" icon={<ICZoomInOutlined />} style={style} />
-          <Button type="text" className='lg-sidebar-button'>Apps <ICDownOutlined /></Button>
-          <Button type="text" className='lg-sidebar-button'>Chat</Button>
-          <Button type="text" className='lg-sidebar-button'>Calender</Button>
-          <Button type="text" className='lg-sidebar-button'>Email</Button>
-        </div>
+          <Button type="text" className='lg-sidebar-button' icon={<ICZoomInOutlined />} style={style} />
+
+          <Dropdown
+            overlay={<Menu>
+              <Menu.Item>Branch 1</Menu.Item>
+              <Menu.Item>Branch 2</Menu.Item>
+              <Menu.Item>Branch 3</Menu.Item>
+            </Menu>}
+            placement="bottomRight"
+            trigger={['click']}
+          >
+            <Button type="text">Branch <ICDownOutlined /></Button>
+          </Dropdown>
+        </div >
         <div>
-          <Button type="text" icon={<ICGithubOutlined />} style={style} />
+          <Button type="text" className='lg-sidebar-button' icon={<ICGithubOutlined />} style={style} />
           <Button type="text" icon={<ICZoomInOutlined />} style={style} />
           <Button type="text" icon={<ICBellOutlined />} style={style} />
-          <Button type="text" icon={<ICTeamOutlined />} style={style} />
+          <Button type="text" className='lg-sidebar-button' icon={<ICTeamOutlined />} style={style} />
         </div>
-        {/* </div> */}
-      </Header>
+      </Header >
 
     </>
   );

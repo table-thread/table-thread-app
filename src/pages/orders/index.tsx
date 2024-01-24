@@ -6,7 +6,7 @@ import HomeLayout from '@/containers/HomeLayout/HomeLayout';
 
 import { Button, Card, Modal } from 'antd';
 
-import { ICIoEye, ICIoEyeOff, ICMdEdit, ICBsTrash3Fill } from '@/utils/icons';
+import { ICIoEye, ICIoEyeOff, ICMdEdit, ICBsTrash3Fill, ICGiNotebook, ICFaCheckCircle } from '@/utils/icons';
 import { productSchemaNewProduct, } from '@/utils/schema';
 import { Formik, Form } from 'formik';
 
@@ -21,18 +21,18 @@ const Order = () => {
   const [product, setProduct] = useState(
     [
       {
-        orderId: 'Starter',
-        date: '18-01-2024',
+        orderId: '55LB5FWQ',
+        totalAmount: '1255',
         items: 10
       },
       {
-        category: 'fast-food',
-        date: '18-01-2024',
+        orderId: '77LB2FWQ',
+        totalAmount: '1124',
         items: 15
       },
       {
-        category: 'desert',
-        date: '18-01-2024',
+        orderId: '53HB5FWQ',
+        totalAmount: '845',
         items: 4
       },
     ]
@@ -99,14 +99,12 @@ const Order = () => {
         <div className='col-12'>
           <Card className='mb-4 ps-3 box-shadow'>
             <div className='d-flex justify-content-between align items-center mb-5'>
-              <div className='fw-bold fs-4' >Products Categories</div>
-              <Button onClick={showModal}>Add New Product</Button>
-              <Modal title="Add Product" open={isModalOpen} onCancel={handleCancel} footer={[]} >
+              <div className='fw-bold fs-4' >Order Details</div>
+              {/* <Button onClick={showModal}>Add New Product</Button> */}
+              {/* <Modal title="Add Product" open={isModalOpen} onCancel={handleCancel} footer={[]} >
                 <div className="row justify-content-center m-0" style={{ backgroundColor: "#f3f7ff" }}>
-                  {/* {contextHolder} */}
 
                   <div className="col-xl-12 col-lg-12 col-md-12 col-12 py-3" >
-                    {/* <div className="" > */}
                     <Formik
                       initialValues={initialState}
                       validationSchema={productSchemaNewProduct}
@@ -164,15 +162,16 @@ const Order = () => {
                         </Form>
                       )}
                     </Formik>
-                    {/* </div> */}
 
                   </div>
                 </div >
-              </Modal>
+              </Modal> */}
             </div>
             <div className='row border-bottom pb-3'>
+              <div className='col-2 fw-bold'>Sr. No</div>
               <div className='col-2 fw-bold'>Order ID</div>
               <div className='col-2 fw-bold'>Table</div>
+              {/* <div className='col-2 fw-bold'>View Order</div> */}
               <div className='col-2 fw-bold'>Total Amount</div>
               <div className='col-2 fw-bold'>Paid Amount</div>
               <div className='col-2 fw-bold'>status</div>
@@ -183,19 +182,21 @@ const Order = () => {
             {product.map((item, index) => {
               return (
                 <div className='row border-bottom align-items-center'>
+                  <div className='col-2'>{index + 1}</div>
                   <div className='col-2 my-3 fw-bolder'>
-                    {index + 1}
+                    {item.orderId}
                   </div>
-                  <div className='col-2'>{item.category}</div>
-                  <div className='col-2'>{item.date}</div>
-                  <div className='col-2'>{item.items}</div>
+                  <div className='col-2'>{index + 1}</div>
+                  {/* <div className='col-2'><ICGiNotebook /></div> */}
+                  <div className='col-2'>{item.totalAmount}</div>
+                  <div className='col-2'>-</div>
                   <div className='col-2 d-flex gap-3'>
-                    <div className='table-icons mb-3' >
-                      <div onClick={() => setEditOpen(true)}><ICMdEdit /></div>
-                    </div>
-                    <div className='table-icons'>
+                    {/* <div className='table-icons mb-3' > */}
+                    <div onClick={() => setEditOpen(true)}><ICFaCheckCircle /></div>
+                    {/* </div> */}
+                    {/* <div className='table-icons'>
                       <div onClick={() => setDeleteOpenfn(index)}><ICBsTrash3Fill /></div>
-                    </div>
+                    </div> */}
                   </div>
 
                 </div>
