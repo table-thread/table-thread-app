@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { Button, Modal } from 'antd';
 import { Formik, Form } from 'formik';
 
+import { ICBsTrash3Fill } from '@/utils/icons';
+
 import CustomInput from '@/component/input/input';
 
 import { productSchemaNewProduct, } from '@/utils/schema';
@@ -14,6 +16,8 @@ const AddProduct = (props: any) => {
 
   const { openModal, setOpenModal, setProduct } = props;
   const [loading, setLoading] = useState<boolean>(false);
+  const [addQuantity, setAddQuantity] = useState([1,2]);
+
 
   const [initialState, setinitialState] = useState<any>({
     productName: "",
@@ -41,6 +45,11 @@ const AddProduct = (props: any) => {
     setProduct((prev: any) => [...prev, onlyApiData]);
     fallBack();
   }
+
+  const AddQuantity = () => {
+    setAddQuantity ((prev) => [...prev,1])
+  }
+
 
 
   return (
@@ -141,6 +150,60 @@ const AddProduct = (props: any) => {
                           />
                           {errors.image && touched.image ? (<div className="in-error text-danger">{`${errors.image}`}</div>) : null}
                         </div>
+
+
+                        <div className="col-12 mt-3" >
+                          <div className='row fw-bold mb-2'>
+                            <div className='col-5'>product quantity</div>
+                            <div className='col-5 '>product price</div>
+                          </div>
+
+                          {addQuantity.map((item, index) => {
+                            return (
+                              <div className='row my-2'>
+                                <div className="col-5" >
+                                  <CustomInput
+                                    // label="Product Name"
+                                    id="productName"
+                                    name="productName"
+                                    placeholder="Product quantity"
+                                    type="text"
+                                    defaultValue={values.productName}
+                                    disabled={false}
+                                    maxLength={250}
+                                    asterisk={true}
+                                    onChangeEvent={handleChange('productName')}
+                                  />
+                                  {errors.productName && touched.productName ? (<div className="in-error text-danger">{`${errors.productName}`}</div>) : null}
+                                </div>
+                                <div className="col-5" >
+                                  <CustomInput
+                                    // label="Amount"
+                                    id="amount"
+                                    name="amount"
+                                    placeholder="price"
+                                    type="number"
+                                    disabled={false}
+                                    maxLength={10}
+                                    defaultValue={values.amount}
+                                    asterisk={true}
+                                    onChangeEvent={handleChange('amount')}
+                                  />
+                                  {errors.amount && touched.amount ? (<div className="in-error text-danger">{`${errors.amount}`}</div>) : null}
+                                </div>
+                                <div className='col-2'>
+                                  <Button><ICBsTrash3Fill /></Button>
+                                </div>
+                              </div>
+                            )
+                          })}
+
+                          <div className='mt-2'>
+                            <Button onClick={AddQuantity}>Add</Button>
+                          </div>
+                        </div>
+
+
                       </div>
 
                       <div className="mt-4" >
