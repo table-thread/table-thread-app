@@ -9,6 +9,7 @@ import CustomInput from '@/component/input/input';
 import { productSchemaNewProduct, } from '@/utils/schema';
 import Loader from '@/component/loader/loader';
 import ButtonSimple from '@/component/buttonsimple/buttonsimple';
+import ProductQuantity from './ProductQuantity';
 
 const TAG = 'modal product add'
 
@@ -16,8 +17,7 @@ const AddProduct = (props: any) => {
 
   const { openModal, setOpenModal, setProduct } = props;
   const [loading, setLoading] = useState<boolean>(false);
-  const [addQuantity, setAddQuantity] = useState([1,2]);
-
+  const [addQuantity, setAddQuantity] = useState([1]);
 
   const [initialState, setinitialState] = useState<any>({
     productName: "",
@@ -39,18 +39,25 @@ const AddProduct = (props: any) => {
       category: formValues.category,
       amount: `${formValues.amount} Rs`,
       image: formValues.image,
-    }
+    };
 
     console.log(TAG, "Api Data to be send", onlyApiData);
     setProduct((prev: any) => [...prev, onlyApiData]);
     fallBack();
-  }
+  };
 
   const AddQuantity = () => {
-    setAddQuantity ((prev) => [...prev,1])
-  }
+    setAddQuantity((prev) => [...prev, 1])
+  };
+
+  const deleteQuantity = (id: any) => {
+    console.log('delete quantity ', id);
+    const result = addQuantity.filter((_, index) => index !== id);
+    console.log(result);
+    setAddQuantity(result)
 
 
+  };
 
   return (
     <div className=''>
@@ -151,58 +158,21 @@ const AddProduct = (props: any) => {
                           {errors.image && touched.image ? (<div className="in-error text-danger">{`${errors.image}`}</div>) : null}
                         </div>
 
-
-                        <div className="col-12 mt-3" >
-                          <div className='row fw-bold mb-2'>
-                            <div className='col-5'>product quantity</div>
-                            <div className='col-5 '>product price</div>
-                          </div>
+                        <div className='row my-2'>
+                          <div className="col-5 fw-bold text-center">Quantity</div>
+                          <div className="col-5 fw-bold text-center">Price</div>
 
                           {addQuantity.map((item, index) => {
                             return (
-                              <div className='row my-2'>
-                                <div className="col-5" >
-                                  <CustomInput
-                                    // label="Product Name"
-                                    id="productName"
-                                    name="productName"
-                                    placeholder="Product quantity"
-                                    type="text"
-                                    defaultValue={values.productName}
-                                    disabled={false}
-                                    maxLength={250}
-                                    asterisk={true}
-                                    onChangeEvent={handleChange('productName')}
-                                  />
-                                  {errors.productName && touched.productName ? (<div className="in-error text-danger">{`${errors.productName}`}</div>) : null}
-                                </div>
-                                <div className="col-5" >
-                                  <CustomInput
-                                    // label="Amount"
-                                    id="amount"
-                                    name="amount"
-                                    placeholder="price"
-                                    type="number"
-                                    disabled={false}
-                                    maxLength={10}
-                                    defaultValue={values.amount}
-                                    asterisk={true}
-                                    onChangeEvent={handleChange('amount')}
-                                  />
-                                  {errors.amount && touched.amount ? (<div className="in-error text-danger">{`${errors.amount}`}</div>) : null}
-                                </div>
-                                <div className='col-2'>
-                                  <Button><ICBsTrash3Fill /></Button>
-                                </div>
+                              <div key={index} id={`${index}`}>
+                                <ProductQuantity deleteQuantity={deleteQuantity} id={index} />
                               </div>
                             )
                           })}
-
                           <div className='mt-2'>
                             <Button onClick={AddQuantity}>Add</Button>
                           </div>
                         </div>
-
 
                       </div>
 
@@ -223,7 +193,6 @@ const AddProduct = (props: any) => {
           </div >
         </section >
       </Modal>
-
     </div>
   )
 }

@@ -11,11 +11,10 @@ import ToastComponent from '@/component/Toast/Toast';
 import Loader from '@/component/loader/loader';
 import InputPassword from '@/component/inputpassword/inputpassword';
 
-import { loginSchema } from '@/utils/schema';
-
 import endPoints from '@/ApiHandler/AppConfig';
 import NetworkOps from '@/ApiHandler/NetworkOps';
 
+import { loginSchema } from '@/utils/schema';
 import { removeplus91 } from '@/utils/helper';
 
 const TAG = "Login: ";
