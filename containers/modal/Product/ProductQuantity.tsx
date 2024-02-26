@@ -1,89 +1,74 @@
-import React, { Children, useState } from 'react';
+import React, { Fragment } from 'react';
+
 import { Button } from 'antd';
-import { Formik, Form } from 'formik';
 
 import { ICBsTrash3Fill } from '@/utils/icons';
 
 import CustomInput from '@/component/input/input';
 
-import { productSchemaNewProduct, } from '@/utils/schema';
+const TAG = 'Product Quantity';
 
-
-const TAG = 'Product Quantity'
 const ProductQuantity = (props: any) => {
 
-  const { deleteQuantity, id } = props;
+  const { handleAddRow, handleRemoveSpecificRow, rows, setRows } = props
 
-  const [initialState, setinitialState] = useState<any>({
-    productQuantity: "",
-    amount: "",
-  });
+  const columnsArray = ["quantity", "quantityPrice"];
 
-  async function callAsync(formValues: any) {
-    const onlyApiData = {
-      productQuantity: formValues.productQuantity,
-      amount: `${formValues.amount} Rs`,
-    };
+  const updateState = (e: any, index: number, column: string) => {
+    const newValue = e.target.value;
 
-    console.log(TAG, "Api Data to be send", onlyApiData);
+    const updatedRows = rows.map((row: any, rowIndex: number) => {
+      if (rowIndex === index) {
+        return { ...row, [column]: newValue };
+      }
+      return row;
+    });
+
+    setRows(updatedRows);
   };
 
-  // console.log(TAG, 'testing quantity');
-  
 
   return (
     <>
-      <section id="productQuantity" >
-        <Formik
-          initialValues={initialState}
-          validationSchema={productSchemaNewProduct}
-          onSubmit={(values) => {
-            callAsync(values);
-          }}
-        >
-          {({ errors, values, touched, handleChange, setFieldValue }) => (
-            <Form className="w-100">
+      <div className='row my-2'>
+        <div className="col-5 fw-bold text-center">Quantity</div>
+        <div className="col-5 fw-bold text-center">Price</div>
 
-              <div className='row my-2'>
-                <div className="col-5" >
+        {rows.map((item: any, idx: any) => (
+          <div className='row my-2' key={`ukey${idx}`}>
+            {columnsArray.map((column, index) => (
+              <Fragment key={index}>
+                <div className="col-5">
                   <CustomInput
-                    // label="Product Name"
-                    id="productQuantity"
-                    name="productQuantity"
-                    placeholder="Product quantity"
+                    id="quantity"
+                    name="quantity"
+                    placeholder={column}
                     type="text"
-                    defaultValue={values.productQuantity}
+                    value={item[column] || ''}
                     disabled={false}
                     maxLength={250}
-                    asterisk={true}
-                    onChangeEvent={handleChange('productQuantity')}
+                    asterisk={false}
+                    onChangeEvent={(e: any) => updateState(e, idx, column)}
                   />
-                  {errors.productName && touched.productName ? (<div className="in-error text-danger">{`${errors.productName}`}</div>) : null}
                 </div>
-                <div className="col-5" >
-                  <CustomInput
-                    // label="Amount"
-                    id="amount"
-                    name="amount"
-                    placeholder="price"
-                    type="number"
-                    disabled={false}
-                    maxLength={10}
-                    defaultValue={values.amount}
-                    asterisk={true}
-                    onChangeEvent={handleChange('amount')}
-                  />
-                  {errors.amount && touched.amount ? (<div className="in-error text-danger">{`${errors.amount}`}</div>) : null}
-                </div>
-                <div className='col-2'>
-                  <Button onClick={()=>deleteQuantity(id)}><ICBsTrash3Fill /></Button>
-                </div>
-              </div>
-
-            </Form>
-          )}
-        </Formik>
-      </section >
+              </Fragment>
+            ))}
+            <div className='col-2'>
+              <Button
+                className="btn btn-sm"
+                onClick={() => handleRemoveSpecificRow(idx)}
+              >
+                <ICBsTrash3Fill />
+              </Button>
+            </div>
+          </div>
+        ))}
+        <div className='clo-2'>
+          <Button onClick={handleAddRow}>
+            Add Row
+          </Button>
+        </div>
+      </div>
     </>
   )
 }
