@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button, Card } from 'antd';
 
 import PaginationComponent from '@/component/pagination/pagination';
@@ -16,12 +16,13 @@ const TAG = "Product Page :";
 
 const Product = () => {
 
-  const [editOpen, setEditOpen] = useState(false);
+  const [editOpen, setEditOpen] = useState<any>(null);
   const [deleteOpen, setDeleteOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState<any>(null);
 
   const [defaultCurrent, setDefaultCurrent] = useState<number>(1);
   const [defaultPageSize, setDefaultPageSize] = useState<number>(10);
+  const [uupId, setuupId] = useState<any>();
 
   const [product, setProduct] = useState([
     {
@@ -115,6 +116,32 @@ const Product = () => {
     setDefaultPageSize(limit);
   };
 
+  useEffect(() => {
+    console.log(TAG, " ", product);
+    localStorage.setItem('productData', JSON.stringify(product));
+  }, [product])
+
+
+  const handleEditClick = (idx: number) => {
+    setuupId(idx);
+    const dataFromLocalStorage = localStorage.getItem('productData');
+    if (dataFromLocalStorage) {
+      const parsedData = JSON.parse(dataFromLocalStorage);
+
+      const filteredProduct: any = parsedData.filter((product: any, index: any) => index === idx);
+
+      if (filteredProduct.length > 0) {
+        setEditOpen(filteredProduct[0]);
+      }
+
+    };
+  }
+
+  const handleDeleteClick = (idx: number) => {
+    setDeleteOpen(true);
+    setuupId(`uupId${idx}`)
+  }
+
   return (
     <HomeLayout>
       <div>
@@ -124,14 +151,14 @@ const Product = () => {
               <div className='fw-bold fs-4 ' >Products</div>
               <Button onClick={() => setIsModalOpen("null")}>Add New Product</Button>
             </div >
-            
+
             <div className='row border-top gy-4 py-3'>
 
               {product.map((item, index) => {
                 return (
-                  <div className='col-lg-3 col-md-4 col-sm-12'>
+                  <div className='col-lg-3 col-md-4 col-sm-12' id={`uupId${index}`} key={index}>
                     <Card className='py-3' hoverable bodyStyle={{ padding: 0 }}>
-                      <img style={{ height: 200, width: '100%', objectFit: 'cover' }} alt="example" src={item.image} />
+                      <img style={{ height: 200, width: '100%', objectFit: 'cover' }} alt="example" src={aaluTikki} />
                       <div className='px-3'>
                         <h5 className='m-0 mt-2'>{item.productName}</h5>
                         <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Hic modi non facere earum.</p>
@@ -143,10 +170,10 @@ const Product = () => {
                           </div>
                           <div className='me-2'>
                             <div className='table-icons mb-3' >
-                              <div onClick={() => setEditOpen(true)}><ICMdEdit /></div>
+                              <div onClick={() => handleEditClick(index)}><ICMdEdit /></div>
                             </div>
                             <div className='table-icons'>
-                              <div onClick={() => setDeleteOpen(true)}><ICBsTrash3Fill /></div>
+                              <div onClick={() => handleDeleteClick(index)}><ICBsTrash3Fill /></div>
                             </div>
                           </div>
                         </div>
@@ -176,14 +203,19 @@ const Product = () => {
             : ""
           },
 
-          <EditProduct
-            openEditModal={editOpen}
-            setEditModalOpen={setEditOpen}
-          />
+          {editOpen !== null ?
+            <EditProduct
+              openEditModal={editOpen}
+              setEditModalOpen={setEditOpen}
+              productToEdit={uupId}
+              product={product}
+            />
+            : ""}
 
           <DeleteProduct
             openDeleteModal={deleteOpen}
             setOpenDeleteModal={setDeleteOpen}
+            id={uupId}
           />
         </>
       </div >

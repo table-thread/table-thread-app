@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import Link from 'next/link';
 import { Menu } from 'antd';
 import { logo, logo2 } from '@/utils/image';
@@ -53,17 +53,17 @@ const Sidenavebar = (props: any) => {
         <img src={logo2} alt="logo" />
         <span className={`fs-3 ${toogleSideBar ? 'd-none' : ''}`}>Table thread</span>
       </div>
-      <Menu className='border border-0 ms-1'>
-        {navItems.map((item) => {
+      <Menu className='border border-0 ms-1' key='ddd'>
+        {navItems.map((item, idx) => {
           return (
-            <>
-              <Menu.Item>
+            <Fragment key={idx}>
+              <Menu.Item key={`sss${idx}`}>
                 <Link className='d-flex align-items-center gap-2' href={item.navLink}>
                   <span>{item.icon}</span>
                   <span className={`fw-medium ${toogleSideBar ? 'd-none' : ''}`}>{item.lable}</span>
                 </Link>
               </Menu.Item>
-            </>
+            </Fragment>
           )
         })
         }
