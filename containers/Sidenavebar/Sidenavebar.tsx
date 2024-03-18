@@ -45,6 +45,11 @@ const Sidenavebar = (props: any) => {
       icon: <ICFaKeyboard />,
       lable: 'Subscriptions'
     },
+    {
+      navLink: '/calender',
+      icon: <ICGiNotebook />,
+      lable: 'calender'
+    }
   ];
 
   return (

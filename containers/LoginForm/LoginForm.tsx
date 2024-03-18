@@ -7,15 +7,17 @@ import { Formik, Form } from 'formik';
 import CustomInput from '@/component/input/input';
 import CustomCheckbox from '@/component/checkbox/checkbox';
 import ButtonSimple from '@/component/buttonsimple/buttonsimple';
+import InputPassword from '@/component/inputpassword/inputpassword';
 import ToastComponent from '@/component/Toast/Toast';
 import Loader from '@/component/loader/loader';
-import InputPassword from '@/component/inputpassword/inputpassword';
 
 import endPoints from '@/ApiHandler/AppConfig';
 import NetworkOps from '@/ApiHandler/NetworkOps';
 
 import { loginSchema } from '@/utils/schema';
 import { removeplus91 } from '@/utils/helper';
+import { object } from 'yup';
+import { json } from 'node:stream/consumers';
 
 const TAG = "Login: ";
 
@@ -35,8 +37,8 @@ const LoginForm = (props: any) => {
     // console.log(TAG, ' values for login ', formValues);
     setLoading(true);
     const apiData = {
-      role: formValues?.role,
-      email: formValues?.emailOrMobile.includes('@') ? formValues?.emailOrMobile.toLowerCase()  : `+91${removeplus91(formValues?.emailOrMobile)}`,
+      role: 'admin',
+      email: formValues?.emailOrMobile.includes('@') ? formValues?.emailOrMobile.toLowerCase() : `+91${removeplus91(formValues?.emailOrMobile)}`,
       password: formValues?.password
     }
     console.log(TAG, ' generated values ', apiData);
@@ -44,9 +46,10 @@ const LoginForm = (props: any) => {
   }
 
   async function registerCall(addJson: any): Promise<void> {
+
     NetworkOps.makePostRequest(endPoints.login, addJson, false)
       .then(async (response: any) => {
-        // console.log(TAG, ' login response ', response);
+        console.log(TAG, ' login response ', response);
         if (response?.status == 200 && response?.data?.success == true) {
           // ToastComponent(response?.data?.msg);
           // console.log("this is login data " ,response ,response?.data?.data?.userData )
@@ -70,9 +73,9 @@ const LoginForm = (props: any) => {
       });
   }
 
+
   return (
     <>
-
       <div className="pt-3 a-input-wrapper" >
         <Formik
           initialValues={initialValues}
@@ -115,7 +118,7 @@ const LoginForm = (props: any) => {
 
               <div className="mt-4 d-flex justify-content-between" >
                 <div className="w-auto" >
-                  <CustomCheckbox  disabled={false} title="Remember me" />
+                  <CustomCheckbox disabled={false} title="Remember me" />
                 </div>
                 <div className="w-auto" >
                   <span className="forgot" > <Link href="forgot-password" > Forgot Password ? </Link> </span>
@@ -123,18 +126,15 @@ const LoginForm = (props: any) => {
               </div>
 
               <div className="mt-4" >
-                {loading === true ?
-                  <Loader /> :
+                {/* {loading === true ? */}
+                {/* <Loader /> : */}
                 <ButtonSimple title="Log In" type="btn btn-primary py-2 fs-4 w-100" />
-                }
+                {/* } */}
               </div>
             </Form>
           )}
         </Formik>
 
-        <div className="mt-4 text-center" >
-          <span className="dont-acc" > {"New to Modernize?"} </span>  <span className="new-ac" > <Link href="/signUp" > Create account </Link></span>
-        </div>
       </div>
     </>
   );

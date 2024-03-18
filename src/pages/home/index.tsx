@@ -8,7 +8,7 @@ import HomeLayout from '@/containers/HomeLayout/HomeLayout';
 
 const Modern = () => {
   // console.log(logo);
-  const array = [1, 2, 3, 4, 5, 6];
+  const array = [1, 2, 3, 4];
   const array2 = [1, 2, 3, 4];
   return (
     <HomeLayout>
@@ -16,7 +16,7 @@ const Modern = () => {
       <div className='row gy-4 text-center'>
         {array.map((x) => {
           return (
-            <div className='col-lg-2 col-md-3 col-sm-4 col-12'>
+            <div className='col-lg-3 col-md-3 col-sm-4 col-12'>
               <Card className='bg-info px-1'>
                 {/* <ICTeamOutlined className='fs-1' /> */}
                 <ICTeamOutlined />

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Button, Card, Modal } from 'antd';
+import { Modal } from 'antd';
 import { Formik, Form } from 'formik';
 
 import CustomInput from '@/component/input/input';
@@ -8,37 +8,39 @@ import ButtonSimple from '@/component/buttonsimple/buttonsimple';
 
 import { productSchemaNewProduct } from '@/utils/schema';
 
-const EditCategories = (props: any) => {
+const EditCategories: React.FC<any> = (props: any) => {
 
-  const { openEditModal, setOpenEditModal } = props;
+  const { openEditModal, setOpenEditModal, setProduct } = props;
 
   const [loading, setLoading] = useState<boolean>(false);
 
   const [initialState, setinitialState] = useState<any>({
-    category: "",
-    date: "",
+    category: openEditModal?.category ? openEditModal?.category : "",
+    date: openEditModal?.date ? openEditModal?.date : "",
   });
 
+  console.log("formValues", initialState);
+  console.log("formValues", openEditModal);
 
   const handleCancel = () => {
-    setOpenEditModal(false);
+    setOpenEditModal(null);
   };
 
   async function callAsync(formValues: any) {
     // console.log(formValues);
-
     const onlyApiData = {
       category: formValues.category,
       date: formValues.date,
     };
 
+    setProduct((prev:any) =>[...prev,onlyApiData]);
     console.log(onlyApiData);
     handleCancel();
   };
 
   return (
     <>
-      <Modal title="Add Product" open={openEditModal} onCancel={handleCancel} footer={[]} >
+      <Modal title="Add Product" open={openEditModal !== null ? true : false} onCancel={handleCancel} footer={[]} >
         <div className="row justify-content-center m-0" style={{ backgroundColor: "#f3f7ff" }}>
           <div className="col-xl-12 col-lg-12 col-md-12 col-12 py-3" >
             <Formik
@@ -89,7 +91,7 @@ const EditCategories = (props: any) => {
                       <Loader /> :
                       <>
                         <ButtonSimple title='Cancel' type='me-3 btn border' onClickEvent={handleCancel} />
-                        <ButtonSimple title="Submit" type="btn btn-primary  me-3" />
+                        <ButtonSimple title="Submit" type="btn btn-primary  me-3" onClickEvent={() => callAsync(values)} />
                       </>}
                   </div>
                 </Form>

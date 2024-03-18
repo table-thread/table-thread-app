@@ -13,20 +13,21 @@ const EditProduct: React.FC<any> = (props: any) => {
 
   const { openEditModal, setEditModalOpen, productToEdit, updateProduct } = props
 
-  // const [rows, setRows] = useState<Record<string, string | number>[]>([]);
+  const [rows, setRows] = useState<Record<string, string | number>[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [initialState, setInitialState] = useState<any>({
-      productName: openEditModal?.productName ? openEditModal?.productName : "",
-      productType: openEditModal?.productType ? openEditModal?.productType : "",
-      category: openEditModal?.productType ?  openEditModal?.productType : "",
-      amount: "",
-      image: ""
+    productName: openEditModal?.productName ? openEditModal?.productName : "",
+    productDiscription: openEditModal?.productDiscription ? openEditModal?.productDiscription : "",
+    productType: openEditModal?.productType ? openEditModal?.productType : "",
+    category: openEditModal?.category ? openEditModal?.category : "",
+    amount: openEditModal?.amount ? openEditModal?.amount : "",
+    image: openEditModal?.image ? openEditModal?.image : ""
+    // image: ''
   });
 
 
   console.log(' openEditModal ', openEditModal);
   console.log(' initialState ', initialState);
-
 
   const fallBack = () => {
     setEditModalOpen(false);
@@ -37,43 +38,18 @@ const EditProduct: React.FC<any> = (props: any) => {
     const updatedProduct = {
       ...initialState,
       productName: formValues.productName,
+      productDiscription: formValues.productDiscription,
       productType: formValues.productType,
       category: formValues.category,
       amount: formValues.amount,
       image: formValues.image,
-      // productQuantity: rows
+      productQuantity: rows
     };
 
     localStorage.setItem('productData', JSON.stringify(updatedProduct));
     updateProduct(updatedProduct);
     fallBack();
   };
-
-  // const columnsArray = ["quantity", "quantityPrice"];
-
-  // const handleAddRow = () => {
-  //   const newRow = {};
-  //   setRows([...rows, newRow]);
-  // };
-
-  // const handleRemoveSpecificRow = (idx: number) => {
-  //   const tempRows = [...rows];
-  //   tempRows.splice(idx, 1);
-  //   setRows(tempRows);
-  // };
-
-  // const updateState = (e: React.ChangeEvent<HTMLInputElement>, index: number, column: string) => {
-  //   const newValue = e.target.value;
-
-  //   const updatedRows = rows.map((row, rowIndex) => {
-  //     if (rowIndex === index) {
-  //       return { ...row, [column]: newValue };
-  //     }
-  //     return row;
-  //   });
-
-  //   setRows(updatedRows);
-  // };
 
   console.log("initialState", initialState);
 
@@ -107,6 +83,22 @@ const EditProduct: React.FC<any> = (props: any) => {
                         onChangeEvent={handleChange('productName')}
                       />
                       {errors.productName && touched.productName ? (<div className="in-error text-danger">{`${errors.productName}`}</div>) : null}
+                    </div>
+
+                    <div className="col-12" >
+                      <CustomInput
+                        label="Product Discription"
+                        id="productDiscription"
+                        name="productDiscription"
+                        placeholder="Product Discription"
+                        type="text"
+                        defaultValue={values.productDiscription}
+                        disabled={false}
+                        maxLength={250}
+                        asterisk={true}
+                        onChangeEvent={handleChange('productDiscription')}
+                      />
+                      {errors.productDiscription && touched.productDiscription ? (<div className="in-error text-danger">{`${errors.productDiscription}`}</div>) : null}
                     </div>
 
                     <div className="col-12" >
@@ -147,7 +139,7 @@ const EditProduct: React.FC<any> = (props: any) => {
                         id="amount"
                         name="amount"
                         placeholder="Amount"
-                        type="number"
+                        type="number  "
                         disabled={false}
                         maxLength={10}
                         defaultValue={values.amount}
@@ -164,12 +156,14 @@ const EditProduct: React.FC<any> = (props: any) => {
                         name="image"
                         placeholder="image"
                         type="file"
-                        defaultValue={values.image}
+                        // defaultValue={values.image}
+                        defaultValue=''
                         disabled={false}
                         maxLength={250}
                         asterisk={false}
                         onChangeEvent={handleChange('image')}
                       />
+                      {/* <div className='col-4'><img className='w-100' src={values?.image ? values.image : "nothing"} /></div> */}
                       {errors.image && touched.image ? (<div className="in-error text-danger">{`${errors.image}`}</div>) : null}
                     </div>
 

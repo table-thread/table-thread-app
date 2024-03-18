@@ -22,6 +22,7 @@ const AddProduct = (props: any) => {
 
   const [initialState, setinitialState] = useState<any>({
     productName: "",
+    productDiscription: "",
     productType: "",
     category: "",
     amount: "",
@@ -36,9 +37,10 @@ const AddProduct = (props: any) => {
     // console.log(TAG, "Form Values", formValues);
     const onlyApiData = {
       productName: formValues.productName,
+      productDiscription: formValues.productDiscription,
       productType: formValues.productType,
       category: formValues.category,
-      amount: `${formValues.amount} Rs`,
+      amount: formValues.amount,
       image: formValues.image,
       productQuantity: rows
     };
@@ -108,6 +110,22 @@ const AddProduct = (props: any) => {
                         onChangeEvent={handleChange('productName')}
                       />
                       {errors.productName && touched.productName ? (<div className="in-error text-danger">{`${errors.productName}`}</div>) : null}
+                    </div>
+
+                    <div className="col-12" >
+                      <CustomInput
+                        label="Product Discription"
+                        id="productDiscription"
+                        name="productDiscription"
+                        placeholder="Product Discription"
+                        type="text"
+                        defaultValue={values.productDiscription}
+                        disabled={false}
+                        maxLength={250}
+                        asterisk={true}
+                        onChangeEvent={handleChange('productDiscription')}
+                      />
+                      {errors.productDiscription && touched.productDiscription ? (<div className="in-error text-danger">{`${errors.productDiscription}`}</div>) : null}
                     </div>
 
                     <div className="col-12" >
