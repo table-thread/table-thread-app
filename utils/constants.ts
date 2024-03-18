@@ -5,7 +5,10 @@
 // export const ApiHost = "http://13.233.81.241:5001/api/v1";
 // export const ApiHost = "http://172.174.73.117:5000/api/v1";
 
-export const ApiHost = "https://apis-dev.accountsntax.com/api/v1";
+export const ApiHost = "https://table-thread.vercel.app/api";
+
+
+
 export const localHost = "http://192.168.1.44:5001/api/v1";
 export const adminCode = "ACCTX23048373416";
 export const temp = "ACCTX23048373416";

@@ -579,59 +579,6 @@ export const companySchema: any = Yup.object().shape({
 });
 
 
-// export const userProfileSchema: any = Yup.object().shape({
-
-//   firstName: Yup.string()
-//     .trim()
-//     .min(3, fieldMinLength.replace("%key%", "First Name").replace("%length%", "3"))
-//     .max(250, fieldlMaxLength.replace("%key%", "First Name").replace("%length%", "250"))
-//     .required(fieldRequired.replace("%key%", "First Name")),
-//   lastName: Yup.string()
-//     .trim()
-//     .min(3, fieldMinLength.replace("%key%", "Last Name").replace("%length%", "3"))
-//     .max(250, fieldlMaxLength.replace("%key%", "Last Name").replace("%length%", "250"))
-//     .required(fieldRequired.replace("%key%", "Last Name")),
-//   gender: Yup
-//     .string()
-//     .trim()
-//     .oneOf(['male', 'female', 'other'])
-//     .required(fieldRequired.replace("%key%", "Gender")),
-//   email: Yup
-//     .string()
-//     .trim()
-//     .email(emailDataType)
-//     .max(250, fieldlMaxLength.replace("%key%", "Email").replace("%length%", "250"))
-//     .required(fieldRequired.replace("%key%", "Email")),
-//   mobile: Yup
-//     .number()
-//     .typeError(numberAllow)
-//     .integer(integerAllow)
-//     .min(1000000000, contactLength)
-//     .max(9999999999, contactLength)
-//     .required(fieldRequired.replace("%key%", "Contact number")),
-//   address: Yup
-//     .string()
-//     .trim()
-//     .min(3, fieldMinLength.replace("%key%", "Address").replace("%length%", "3"))
-//     .max(1000, fieldlMaxLength.replace("%key%", "Address").replace("%length%", "1000"))
-//     .required(fieldRequired.replace("%key%", "Address")),
-//   country: Yup.string()
-//     .trim()
-//     .required(fieldRequired.replace("%key%", "Country")),
-//   state: Yup.string()
-//     .trim()
-//     .required(fieldRequired.replace("%key%", "State")),
-//   city: Yup.string()
-//     .trim()
-//     .required(fieldRequired.replace("%key%", "City")),
-//   zipCode: Yup
-//     .string()
-//     .trim()
-//     .min(5, fieldMinLength.replace("%key%", "Pin Code").replace("%length%", "5"))
-//     .max(6, fieldlMaxLength.replace("%key%", "Pin Code").replace("%length%", "6"))
-//     .required(fieldRequired.replace("%key%", "Pin Code")),
-// });
-
 export const userProfileSchema: any = Yup.object().shape({
 
   firstName: Yup.string()
@@ -1298,6 +1245,12 @@ export const productSchemaNewProduct: any = Yup.object().shape({
     .min(3, fieldMinLength.replace("%key%", "Product Name").replace("%length%", "3"))
     .max(250, fieldlMaxLength.replace("%key%", "Product Name").replace("%length%", "250"))
     .required(fieldRequired.replace("%key%", "Product Name")),
+    productDiscription: Yup
+    .string()
+    .trim()
+    .min(10, fieldMinLength.replace("%key%", "Product Discription").replace("%length%", "10"))
+    .max(250, fieldlMaxLength.replace("%key%", "Product Discription").replace("%length%", "250"))
+    .required(fieldRequired.replace("%key%", "Product Discription")),
   productType: Yup
     .string()
     .trim()
@@ -1324,4 +1277,27 @@ export const productSchemaNewProduct: any = Yup.object().shape({
   //   .string()
   //   .trim()
   //   .required(fieldRequired.replace("%key%", "date"))
+});
+
+export const categorySchemaNewCategory: any = Yup.object().shape({
+  category: Yup
+    .string()
+    .trim()
+    .min(3, fieldMinLength.replace("%key%", "Food Category").replace("%length%", "3"))
+    .max(250, fieldlMaxLength.replace("%key%", "Food Category").replace("%length%", "250"))
+    .required(fieldRequired.replace("%key%", "Food Category")),
+  // amount: Yup
+  //   .number()
+  //   .typeError(numberAllow)
+  //   .integer(integerAllow)
+  //   .max(100000, amount)
+  //   .required(fieldRequired.replace("%key%", "amount")),
+  // image: Yup
+  //   .string()
+  //   .trim()
+  //   .required(fieldRequired.replace("%key%", "image")),
+  date: Yup
+    .string()
+    .trim()
+    .required(fieldRequired.replace("%key%", "date"))
 });

@@ -13,7 +13,7 @@ const Tables = () => {
       <div className='row gap-2'>
         <div><h4> Table 1</h4>
           <Canvas
-            text={'https://table-thread-app.vercel.app/product'}
+            text={'https://table-thread-client-app.vercel.app/'}
             options={{
               errorCorrectionLevel: 'M',
               margin: 3,
