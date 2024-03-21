@@ -26,6 +26,7 @@ const LoginForm = (props: any) => {
   const router = useRouter();
 
   const [loading, setLoading] = useState<boolean>(false);
+  const [logindata, setLogindata] = useState<any>();
 
   const initialValues: any = {
     role: "client",
@@ -33,9 +34,16 @@ const LoginForm = (props: any) => {
     password: ""
   }
 
+  // console.log("login response deta : ", logindata);
+  // logindata.forEach((element: any) => {
+  // console.log("login response deta : ", element.adminData._id);
+  // console.log("login response deta : ", element.token.token);
+  // });
+
+
   async function callAsync(formValues: any) {
     // console.log(TAG, ' values for login ', formValues);
-    setLoading(true);
+    // setLoading(true);
     const apiData = {
       role: 'admin',
       email: formValues?.emailOrMobile.includes('@') ? formValues?.emailOrMobile.toLowerCase() : `+91${removeplus91(formValues?.emailOrMobile)}`,
@@ -45,30 +53,43 @@ const LoginForm = (props: any) => {
     registerCall(apiData);
   }
 
-  async function registerCall(addJson: any): Promise<void> {
 
+  async function registerCall(addJson: any): Promise<void> {
     NetworkOps.makePostRequest(endPoints.login, addJson, false)
       .then(async (response: any) => {
-        console.log(TAG, ' login response ', response);
+        // console.log(TAG, ' login response ', response);
         if (response?.status == 200 && response?.data?.success == true) {
-          // ToastComponent(response?.data?.msg);
-          // console.log("this is login data " ,response ,response?.data?.data?.userData )
+
+          ToastComponent(response?.data?.message);
+          console.log("this is login data " ,response ,response?.data?.data?.userData )
+          const sessionAdminData = {};
+          const sessionTokenData = {};
+          // Object.assign(sessionData, { cookie: response?.data?.data?.cookie });
+          Object.assign(sessionAdminData, { loginData: response?.data?.data[0].adminData });
+          Object.assign(sessionTokenData, { loginData: response?.data?.data[0].token });
+          // Object.assign(sessionData, { userLicense: response?.data?.data?.license });
+          
+          localStorage.setItem('adminData', JSON.stringify(sessionAdminData));
+          localStorage.setItem('adminTokenData', JSON.stringify(sessionTokenData));
           router.push('/home');
+
+
         } else if (response?.status == 200 && response?.data?.success == false) {
+
           setLoading(false);
           // localStorage.setItem('otpmobile', JSON.stringify(response?.data?.data));
-          // ToastComponent(response?.data?.msg);
-          // router.push(`/signUp`);
-          router.push('/home');
+          ToastComponent(response?.data?.message);
+          // router.push(`/mobile-verify`);
+
         } else {
           setLoading(false);
-          ToastComponent(response?.data?.msg);
+          ToastComponent(response?.data?.message);
           console.log(TAG, ' error got in else ');
         }
       })
       .catch((error: any) => {
         setLoading(false);
-        error?.data?.msg ? ToastComponent(error?.data?.msg) : null;
+        error?.data?.msg ? ToastComponent(error?.data?.message) : null;
         console.log(TAG, ' error i got in catch ', error);
       });
   }
@@ -126,10 +147,10 @@ const LoginForm = (props: any) => {
               </div>
 
               <div className="mt-4" >
-                {/* {loading === true ? */}
-                {/* <Loader /> : */}
-                <ButtonSimple title="Log In" type="btn btn-primary py-2 fs-4 w-100" />
-                {/* } */}
+                {loading === true ?
+                  <Loader /> :
+                  <ButtonSimple title="Log In" type="btn btn-primary py-2 fs-4 w-100" />
+                }
               </div>
             </Form>
           )}

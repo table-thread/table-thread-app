@@ -16,7 +16,7 @@ const Modern = () => {
       <div className='row gy-4 text-center'>
         {array.map((x) => {
           return (
-            <div className='col-lg-3 col-md-3 col-sm-4 col-12'>
+            <div className='col-lg-3 col-md-3 col-sm-4 col-12' key={x}>
               <Card className='bg-info px-1'>
                 {/* <ICTeamOutlined className='fs-1' /> */}
                 <ICTeamOutlined />
@@ -272,7 +272,7 @@ const Modern = () => {
 
             {array2.map((x) => {
               return (
-                <Col span={24} className='row border-bottom align-items-center'>
+                <Col span={24} className='row border-bottom align-items-center' key={x}>
                   <Col span={9} className='mt-2'>
                     <p className='mb-0 fw-bolder'>Sunil Joshi</p>
                     <p className=''>Web Designer</p>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Button, Modal } from 'antd';
 import { Formik, Form } from 'formik';
 import { useRouter } from 'next/router';
@@ -24,10 +24,18 @@ const AddCategories = (props: any) => {
   const { openModal, setOpenModal, addCategorie } = props;
 
   const [loading, setLoading] = useState<boolean>(false);
+  const [restorentrestaurant, setSestorentrestaurant] = useState<any>(false);
   const [initialState, setinitialState] = useState<any>({
     category: "",
     date: "",
   });
+
+  useEffect(() => {
+    const adminData: any = localStorage.getItem("adminData");
+    const parseAdminData = JSON.parse(adminData)
+    console.log(TAG, " admin deta from localstorege", parseAdminData);
+    setSestorentrestaurant(parseAdminData.loginData._id)
+  }, [])
 
 
   const handleCancel = () => {
@@ -38,43 +46,49 @@ const AddCategories = (props: any) => {
     console.log(formValues);
 
     const onlyApiData = {
-      category: formValues.category,
-      date:formValues.date,
+      name: formValues.category,
+      restaurentId: restorentrestaurant,
+
+      // name: "aalu Paneer",
+      // restaurentId: "65f68e0f79e0b63464997d41",
+
     }
     addCategorie((prev: any) => [...prev, onlyApiData])
-    console.log(onlyApiData);
-    handleCancel();
+    registerCall(onlyApiData)
+    // console.log(onlyApiData);
+    // handleCancel();
     // registerCall(onlyApiData);
   }
 
   async function registerCall(addJson: any): Promise<void> {
 
-    NetworkOps.makePostRequest(endPoints.addCategory, addJson, false)
+    NetworkOps.makePostRequest(endPoints.addCategory, addJson, true)
       .then(async (response: any) => {
-        console.log(TAG, ' login response ', response);
+        console.log(TAG, ' addCategory response ', response);
         if (response?.status == 200 && response?.data?.success == true) {
-          // ToastComponent(response?.data?.msg);
-          console.log("this is category data " ,response ,response?.data?.data?.userData )
+          ToastComponent(response?.data?.message);
+          console.log("this is addCategory data ", response)
           // router.push('/home');
+          handleCancel();
         } else if (response?.status == 200 && response?.data?.success == false) {
           setLoading(false);
           // localStorage.setItem('otpmobile', JSON.stringify(response?.data?.data));
           // ToastComponent(response?.data?.msg);
           // router.push(`/signUp`);
-          router.push('/home');
+          // router.push('/home');
         } else {
           setLoading(false);
-          ToastComponent(response?.data?.msg);
+          ToastComponent(response?.data?.message);
           console.log(TAG, ' error got in else ');
         }
       })
       .catch((error: any) => {
         setLoading(false);
-        error?.data?.msg ? ToastComponent(error?.data?.msg) : null;
+        error?.data?.detail ? ToastComponent(error?.data?.detail) : null;
         console.log(TAG, ' error i got in catch ', error);
       });
 
-    handleCancel();
+    // handleCancel();
   }
 
   return (

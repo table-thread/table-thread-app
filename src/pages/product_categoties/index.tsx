@@ -39,6 +39,8 @@ const ProductCategories = () => {
     }
   ]);
 
+  
+
   return (
     <HomeLayout>
       <div className='col-12'>

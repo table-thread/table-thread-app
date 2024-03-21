@@ -196,7 +196,7 @@ const Product = () => {
     };
   }
 
-  const handleDeleteClick = (item: any, idx :any) => {
+  const handleDeleteClick = (item: any, idx: any) => {
     setDeleteOpen(idx);
     // setuupId(`uupId${idx}`);
   };
@@ -237,10 +237,10 @@ const Product = () => {
                         <h5 className='m-0 mt-2'>{item.productName}</h5>
                         <p>
                           {item.productDiscription ?
-                            item.productDiscription
+                            item.productDiscription.slice(0, 75)
                             :
                             "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Hic modi non facere earum."
-                          }
+                          }<span className='fw-bold'>...More</span>
                         </p>
                         <div className='d-flex justify-content-between'>
                           <div>

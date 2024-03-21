@@ -292,11 +292,12 @@ export const noDecimal = (value: any): any => {
 }
 
 export const getToken = () => {
-  const checking: any = localStorage.getItem('userData');
+  const checking: any = localStorage.getItem('adminTokenData');
   if (isEmpty(checking)) {
     window.location.replace('/login');
   } else {
-    return JSON.parse(checking);
+    
+    return JSON.parse(checking)?.loginData;
   }
 }
 
